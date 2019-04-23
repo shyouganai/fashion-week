@@ -1,0 +1,17 @@
+.carousel-caption {
+	text-shadow: 2px 2px 1px black;
+}
+.card {
+	border: 0px !important;
+	margin-bottom: 20px;
+}
+.card-body {
+	padding: 5px 20px 8px 20px;
+}
+.btn-link {
+	background: #f0f0f0;
+	color: #000;
+}
+.card-news {
+	margin-bottom: 80px;
+}

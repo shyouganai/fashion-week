@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<!------Carousel Block------>
+<div id="carousel" class="carousel slide col-9 mx-auto" data-ride="carousel" style="height: 500px;overflow:hidden">
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2018%2F06%2Fplayboi-carti-summer-2018-north-american-tour-tw.jpg?w=960&cbr=1&q=90&fit=max" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Playboi Carti</h5>
+				<p>2017</p>
+			</div>
+		</div>
+    	<div class="carousel-item">
+    		<img src="https://guestlist.net/uploads/articles/2018/02/92883.jpg" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Playboi Carti</h5>
+				<p>2017</p>
+			</div>
+   		</div>
+    	<div class="carousel-item">
+    		<img src="https://image-cdn.hypb.st/https%3A%2F%2Fhypebeast.com%2Fimage%2F2017%2F05%2Fplayboi-carti-ssense-2017-interview-tw.jpg?w=960&cbr=1&q=90&fit=max" class="d-block w-100" alt="...">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Playboi Carti</h5>
+				<p>2017</p>
+			</div>
+    	</div>
+  	</div>
+	<a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+    	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    	<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+    	<span class="sr-only">Next</span>
+	</a>
+</div>
+
+<!------Popular section------>
+<div class="col-9 mx-auto mt-5 mb-5">
+	<h3 class="mb-4" style="font-weight:bold">Популярное</h3>
+	<div class="row">
+		{% for post in posts %}
+			<div class="col-6">
+				<div class="card">
+					<div class="row no-gutters">
+						<div class="col-3">
+							<img src="https://avatar-xbl.tracker.gg/image.png?url=wHwbXKif8cus8csoZ03RW_ES.ojiJijNBGRVUbTnZKsoCCCkjlsEJrrMqDkYqs3MQENJWlMjCraY482GcG.jNS9BWJZ1EYy0s_xFreVjCIqj1TYPQAr_Va8Z0EM7QbKr10pk38yoicdP6uSWIEpk4_WBtn.U.oXmUB70pDIfJOQ-" class="card-img">
+						</div>
+						<div class="col-9">
+							<div class="card-body">
+								<h5 class="card-title">{{ post.title }}</h5>
+								<p class="card-text">{{ post.description }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<!------News Section------>
+<div class="col-6 mx-auto mt-5 mb-5">
+	<h3 class="mb-4" style="font-weight:bold">Свежее</h3>
+	<div class="card card-news">
+		<h5 class="card-title">Playboi Carti</h5>
+		<p class="card-text">Подходит в случае если мы ограничены структурой, и нет возможности манипулировать родительским элементом, а блок выровнять как-то нужно. На помощь придёт css функция translate(). При значение 50% абсолютное позиционирование расположит верхний левый угол блока точно по центру, затем отрицательное значение translate сдвинет блок относительно своих собственных размеров. Учтите, что могут всплыть негативные эффекты в виде размытых граней или начертания шрифта. Также подобный способ может привести к проблемах с вычислением положения блока с помощью java-script'а. Иногда для компенсации потери 50% ширины из-за использования css свойства left может помочь заданное у блока правило: margin-right: -50%;.</p>
+		<p class="card-subtitle text-muted">Last updated 3 mins ago</p>
+	</div>
+	<div class="card card-news">
+		<h5 class="card-title">Playboi Carti</h5>
+		<p class="card-text">Подходит в случае если мы ограничены структурой, и нет возможности манипулировать родительским элементом, а блок выровнять как-то нужно. На помощь придёт css функция translate(). При значение 50% абсолютное позиционирование расположит верхний левый угол блока точно по центру, затем отрицательное значение translate сдвинет блок относительно своих собственных размеров. Учтите, что могут всплыть негативные эффекты в виде размытых граней или начертания шрифта. Также подобный способ может привести к проблемах с вычислением положения блока с помощью java-script'а. Иногда для компенсации потери 50% ширины из-за использования css свойства left может помочь заданное у блока правило: margin-right: -50%;.</p>
+		<p class="card-subtitle text-muted">Last updated 3 mins ago</p>
+	</div>
+</div>
+{% endblock %}
