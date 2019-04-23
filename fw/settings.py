@@ -4,7 +4,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'mr3p)+!d35kmqcu^a8ej603c9sd6o1nk2zz)459=ric*=l_7%3'
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        '127.0.0.1',
+        'fashion-week.herokuapp.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -79,4 +82,4 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
