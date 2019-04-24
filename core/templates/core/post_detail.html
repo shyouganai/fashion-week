@@ -10,11 +10,13 @@
 
 {% block content %}
 <div class="post col-8 mx-auto">
+	<h1 style="margin-top: 40px">{{ post.title }}</h1>
 	{% autoescape off %}
 		{{ text }}
 	{% endautoescape %}
 	{% if post.author == request.user %}
 		<a class="btn btn-secondary btn-sm col-2" href="{% url 'post-edit' post.id %}" style="margin-left: 15%">Редактировать</a>
+		<a class="btn btn-danger btn-sm col-2 ml-2" href="{% url 'post-delete' post.id %}">Удалить</a>
 	{% endif %}
 	<div class="card comments">
 		<h5 class="card-header">Комментарии</h5>
