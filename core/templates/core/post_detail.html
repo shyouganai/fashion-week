@@ -13,6 +13,9 @@
 	{% autoescape off %}
 		{{ text }}
 	{% endautoescape %}
+	{% if post.author == request.user %}
+		<a class="btn btn-secondary btn-sm col-2" href="{% url 'post-edit' post.id %}" style="margin-left: 15%">Редактировать</a>
+	{% endif %}
 	<div class="card comments">
 		<h5 class="card-header">Комментарии</h5>
 		<div class="card-body">

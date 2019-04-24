@@ -27,18 +27,81 @@
   			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Популярные<span class="sr-only">(current)</span></a>
+						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Популярные</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Горячие</a>
+						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Горячие</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Свежие</a>
 					</li>
-					<li class="nav-item" data-toggle="tooltip" data-placement="bottom" title="Скоро все будет">
-						<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Загадка</a>
-					</li>
 				</ul>
+				{% if user.is_authenticated %}
+					<a class="btn btn-secondary btn-sm ml-auto" href="{% url 'post-create' %}">Создать</a>
+					<a class="btn btn-light btn-sm ml-2" href="{% url 'logout' %}">Выход</a>
+				{% else %}
+					<button type="button" class="btn btn-light btn-sm ml-auto" data-toggle="modal" data-target="#loginModal">Войти</button>
+					<button type="button" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#registerModal">Регистрация</button>
+
+					<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+					    	<div class="modal-content">
+					    		<div class="modal-header">
+					        		<h5 class="modal-title" id="loginModalLabel">Войти</h5>
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          			<span aria-hidden="true">&times;</span>
+					        		</button>
+					      		</div>
+					      		<div class="modal-body">
+					        		<form method="POST" action="{% url 'login' %}">
+					        			{% csrf_token %}
+					          			<div class="form-group">
+					            			<label for="id_username" class="col-form-label">Логин:</label>
+					            			<input type="text" class="form-control form-control-sm" id="id_username" name="username" autofocus required>
+					          			</div>
+					          			<div class="form-group">
+					            			<label for="id_password" class="col-form-label">Пароль:</label>
+								            <input type="password" class="form-control form-control-sm" id="id_password" name="password" required>
+								        </div>
+								        <button type="submit" class="btn btn-primary btn-sm" type="submit">Войти</button>
+								    </form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+					    	<div class="modal-content">
+					    		<div class="modal-header">
+					        		<h5 class="modal-title" id="loginModalLabel">Регистрация</h5>
+					        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          			<span aria-hidden="true">&times;</span>
+					        		</button>
+					      		</div>
+					      		<div class="modal-body">
+					        		<form method="POST" action="{% url 'registration' %}">
+					        			{% csrf_token %}
+					          			<div class="form-group">
+					            			<label for="id_username" class="col-form-label">Логин:</label>
+					            			<input type="text" class="form-control form-control-sm" id="id_username" name="username" required>
+					          			</div>
+					          			<div class="form-group">
+					            			<label for="id_password1" class="col-form-label">Пароль:</label>
+								            <input type="text" class="form-control form-control-sm" id="id_password1" name="password1" required>
+								        </div>
+					          			<div class="form-group">
+					            			<label for="id_password2" class="col-form-label">Пароль:</label>
+								            <input type="text" class="form-control form-control-sm" id="id_password2" name="password2" required>
+								        </div>
+							        	<button type="submit" class="btn btn-primary btn-sm" type="submit">Регистрация</button>
+								    </form>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+
 			</div>
 		</nav>
 		<div id="content">

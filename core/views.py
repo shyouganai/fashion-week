@@ -2,7 +2,9 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
+from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
@@ -28,16 +30,15 @@ class PostDetailView(generic.DetailView):
     		context['text'] += f.read()
     	return context
 
-class CommentListView(generic.ListView):
-    model = Comment
-
-
 def post_create(request):
     if request.method == 'GET':
-        form = PostForm()
-        return render(request,
-            'core/post_create.html',
-            context={'form': form,})
+        if request.user.is_authenticated:
+            form = PostForm()
+            return render(request,
+                'core/post_create.html',
+                context={'form': form,})
+        else:
+            return redirect('index')
     else:
         form = PostForm(request.POST)
         if form.is_valid():
@@ -70,3 +71,33 @@ def post_edit(request, pk):
             with open('core/posts/'+str(post.id)+'.html', 'w') as f:
                 f.write(request.POST['text'])
             return redirect('post-detail', pk=post.id)
+
+
+class CommentListView(generic.ListView):
+    model = Comment
+
+
+# Accounts
+class LoginFormView(generic.FormView):
+    form_class = AuthenticationForm
+    template_name = 'login.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        self.user = form.get_user()
+        login(self.request, self.user)
+        return super(LoginFormView, self).form_valid(form)
+
+class RegisterFormView(generic.FormView):
+    form_class = UserCreationForm
+    template_name = 'registration.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.save()
+        return super(RegisterFormView, self).form_valid(form)
+
+class LogoutView(generic.base.View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/')
