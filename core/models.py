@@ -8,6 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=140, null=False, blank=False)
     datetime = models.DateTimeField(default=timezone.now, null=False, blank=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    views = models.IntegerField(blank=False, null=False, default=0)
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.id)])

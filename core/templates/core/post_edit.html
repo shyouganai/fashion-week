@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="col-7 mx-auto mt-5">
+		<form method="post" action=".">
+			{% csrf_token %}
+			<label for="id_title">Название</label><br>
+			<input type="text" id="id_title" name="title" class="mb-1 form-control" required value="{{ form.title.value }}"><br>
+			<label for="id_text">Текст</label><br>
+			<textarea id="id_text" name="text" class="mb-3 form-control" rows="10">{{ text }}</textarea>
+			<button class="btn btn-info ml-auto" type="submit">Сохранить</button>
+			<a class="btn btn-light ml-1" href="{% url 'post-detail' id %}" target="_blank">Посмотреть</a>
+		</form>
+	</div>
+{% endblock %}
