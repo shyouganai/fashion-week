@@ -30,3 +30,21 @@ class PostDetailView(generic.DetailView):
 
 class CommentListView(generic.ListView):
     model = Comment
+
+
+def post_create(request):
+    if request.method == 'GET':
+        form = PostForm()
+        return render(request,
+            'core/post_create.html',
+            context={'form': form,})
+    else:
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            with open('core/posts/'+str(post.id)+'.html', 'w') as f:
+                f.write(request.POST['text'])
+        return render(request,
+            'index.html',)
